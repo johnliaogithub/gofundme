@@ -1,0 +1,5 @@
+Client ID
+575386112543-k2inroh93uiv46ghpkkk8lbug3fqmeci.apps.googleusercontent.com 
+
+Client Secret
+L1jAD1Bun2RqpDWRb3MFz9vS 
