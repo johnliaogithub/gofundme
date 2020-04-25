@@ -1,0 +1,117 @@
+v-blur
+blurs stuff
+3 ways to use
+1.
+<p v-blur='{isBlurred: true, opacity: 0.1, ...}'>hello</p>
+
+2.
+<p v-blur="blurConfig"></p>
+<script>
+  export default {
+  name: "HelloWorld",
+  data() {
+    return {
+      blurConfig: {
+        isBlurred: true,
+        opacity: 0.1,
+        ...
+      }
+    };
+  },
+</script>
+
+Unblur
+
+methods: {
+  toggleBlur(){
+    this.blurConfig.isBlurred = !this.blurConfig.isBlurred;
+  }
+}
+
+3
+<p v-blur="true">hello</p>    default
+_________________________________________________________________________________________
+
+this.$emit(funtionname, param)
+emit a signal from the child to tell the parent a event happend(for example hover)
+example:
+child.vue
+<button @click="function('hello')"></button>
+methods: {
+  function(param) {
+    this.$emit('functiontocall', param)
+  }
+}
+
+parent.vue
+
+<p @functiontocall="changesomething()">{{ something }}</p>
+<script>
+methods: {
+  changesomething(e) {
+    this.something = e;
+  }
+}
+</script>
+_________________________________________________________________________________________
+svg <g> 
+Grouping svg tags, just like a div
+
+svg <defs> 
+Grouping svg tags, everything in it is stored for later use, just like a function it could be called many times
+
+svg <use>
+calls def,kind of like calling a function
+_________________________________________________________________________________________
+import {...} from ...
+named import. imports stuff strictly so the import name is the exact name as the export name
+_________________________________________________________________________________________
+'something'
+used in 'new Vue{}' and in 'export default{}'. it is the short form for writing 'something: "something"'. both somethings are the exact same for example:
+hello: 'hello'
+Hi: 'Hi'
+
+example: 
+methods: {
+  ...mapActions([
+    'getUserInfo'
+  ])
+}
+_________________________________________________________________________________________
+paypal
+payment on website
+help: https://developer.paypal.com/docs/checkout/integrate/
+
+the following example is the only working example on vue
+
+public/index.html:
+<script src="https://www.paypal.com/sdk/js?client-id=SB_CLIENT_ID">    //replace SB_CLIENT_ID with your actual client 
+                                                                       //id, that would be explained in the link 
+</script>
+
+src/views/payment.vue:
+<script>
+  paypal.Buttons({
+      style: {
+          shape: 'pill',
+          color: 'silver',
+          layout: 'vertical',
+          label: 'paypal',
+          
+      },
+      createOrder: function(data, actions) {
+          return actions.order.create({
+              purchase_units: [{
+                  amount: {
+                      value: '1'
+                  }
+              }]
+          });
+      },
+      onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+          });
+      }
+  }).render('#paypal-button-container');
+</script>
