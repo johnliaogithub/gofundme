@@ -11,6 +11,23 @@
         <img style="width: 100%;" src="https://d25oniaj7o2jcw.cloudfront.net/outbreak-coronavirus-world.png"/>
       </div>
     </div>
+    <div style="background-color: #fbf8f6;width: 100%;left: 0px;position: absolute;margin-top: 35%;">
+      <h2 style="margin-top: 50px;margin-bottom: 40px;">Here's how you can help</h2>
+      <div style="padding: 0px 17% 0px 17%;">
+        <div style="float: left;margin-right: 10%;">
+          <div class="circle">1</div>
+          <div class="howtohelp"><h3>Donate to coronavirus<br />fundraisers</h3></div>
+        </div>
+        <div style="float: left;margin-right: 10%;">
+          <div class="circle">2</div>
+          <div class="howtohelp"><h3>Share with your social<br />networks</h3></div>
+        </div>
+        <div style="float: left;">
+          <div class="circle">3</div>
+          <div class="howtohelp"><h3>Start a fundraiser to<br />support someone in need</h3></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,5 +42,19 @@ export default{
 <style>
 .donatebutton:hover {
   background-color: darkgreen;
+}
+.circle {
+  border-radius: 50%;
+  font-size: 20px;
+  color: green;
+  border: 1px green solid;
+  padding-top: 10px;
+  width: 35px;
+  height: 28px;
+}
+.howtohelp {
+  text-align: left;
+  color: green;
+  font-size: 20px;
 }
 </style>
