@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Signup from '../views/Signup.vue'
 import New from '../views/New.vue'
+import Covid19page from '../views/Covid19page.vue'
+import Funddetail from '../views/Funddetail.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +23,16 @@ Vue.use(VueRouter)
     path: '/new',
     name: 'new',
     component: New
+  },
+  {
+    path: '/fund/:fundname',
+    name: 'funddetail',
+    component: Funddetail
+  },
+  {
+	path: '/Covid19page',
+	name: 'covid19page',
+	component: Covid19page
   },
   {
     path: '/Search/:searched',

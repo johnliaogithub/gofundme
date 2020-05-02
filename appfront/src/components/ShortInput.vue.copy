@@ -1,0 +1,45 @@
+<template>
+  <div class="ShortInput" >
+    <input v-if="os == true" :type="type" :style="sty" :value="value" :placeholder="placeholder">
+    <div v-if="os == false">
+      <input :type="type" style="padding: 5px;font-size: 18px;width: 30%;position: absolute" :value="value" >
+      <div :id="placeholderid" style="z-index: 20;position:absolute;font-size: 18px;" :style="pos">{{ placeholder }}</div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: 'ShortInput',
+  props: {
+    value: String,
+    placeholder: String,
+    type: String,
+    sty: String,
+    pos: String,
+    placeholderid: String,
+  },
+  data() {
+    return {
+      os: false
+    }
+  },
+  methods: {
+    foc: function() {
+      document.getElementByTagName('body').style.background = 'blue';
+      var i;
+      var element = document.getElementById(this.placeholder + 'p').style.left;
+      for (i=0; i<20;i++) {
+        element = String(parseInt(element.replace(/\D/g,'')) + 1) + '%';
+        document.getElementById(this.placeholder + 'p').style.left = element;
+      }
+    }
+  },
+  mounted() {
+    if (this.sty == '' || this.sty == ' ' || this.sty == undefined) {
+      this.os = false
+    } else {
+      this.os = true
+    }
+  }
+}
+</script>
