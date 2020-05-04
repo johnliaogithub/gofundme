@@ -43,13 +43,30 @@
           <p style="margin: 0px;"><span style="float: left;">{{ object.amount }}</span><ul style="float: left;margin: 0px;color: #A7A7A7;"><li>{{ object.time }}</li></ul></p>
         </div>
       </div>
-      <div style="margin-top: 50px;">
-        <button style="border-radius: 5px;border: 2px green solid;background-color: white;color: green;padding: 5px 15px;font-size: 14px;font-weight: bold;">See all</button>
+      <div style="margin-top: 80px;">
+        <button @click="seeall = true" style="border-radius: 5px;border: 2px green solid;background-color: white;color: green;padding: 5px 15px;font-size: 14px;font-weight: bold;">See all</button>
       </div>
     </div >
-    <div @click="share = false" v-if="share" style="background: rgba(0,0,0, 0.5);width: 100%;position: absolute;height: 100%;z-index: 1001;left: 0px;top: 0px;">
+    <div @click="share = false;seeall = false" v-if="share || seeall" style="background: rgba(0,0,0, 0.5);width: 100%;position: fixed;height: 100%;z-index: 1001;left: 0px;top: 0px;">
     </div>
-    <div v-if="share" style="text-align: left;padding: 20px 10px;width: 45%;position: absolute;left: 25%;height: 70%;top: 15%;background-color: white;z-index: 1002;border-radius: 5px;">
+    <div v-if="seeall" class="popup">
+      <div v-if="alldonations">
+        <h3 style="margin-top: 0px;float: left;font-weight: bold;">Donations ({{ donors }})</h3>
+        <div style="float: right;">
+          <button style="border-radius: 20px;color: black;background-color: white;box-shadow: 0px 0px 10px lightgrey;padding: 5px;"><i class="mdi mdi-toggle-switch"></i>See top donations</button>
+        </div>
+      </div>
+        <div v-if="alldonations == false">
+          <h1 style="float: left;font-weight: bold;">TOP DONATIONS</h1>
+        <div style="float: right;">
+        <button style="border-radius: 20px;color: black;background-color: white;box-shadow: 0px 0px 10px lightgrey;padding: 5px 10px;"><i class="mdi mdi-menu"></i>See all donations</button>
+      </div>
+      </div>
+      <div v-if="topdonations">
+        
+      </div>
+    </div>
+    <div v-if="share" class="popup">
       <a @click="share = false" class="pointer" style="position: absolute;float: right;right: 20px;top: 20px"><i class="mdi mdi-close"></i></a><br />
       <h1>Help by sharing</h1><br />
       <p>Fundraisers shared on social network raise up to 5x more!</p>
@@ -69,7 +86,9 @@ export default {
       searchbar: false,
       searchvalue: '',
       hide1: false,
-      share: false
+      share: false,
+      seeall: false,
+      alldonations: true
     }  
   },
   computed: {
@@ -165,5 +184,18 @@ export default {
   margin-top: -8px;
   margin-right: 5px;
   font-weight: bold;
+}
+.popup {
+  text-align: left;
+  padding: 20px 10px;
+  width: 45%;
+  position: fixed;
+  left: 25%;
+  height: 70%;
+  top: 15%;
+  background-color: white;
+  z-index: 1002;
+  border-radius: 5px;
+  overflow: auto;
 }
 </style>
