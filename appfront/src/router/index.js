@@ -25,7 +25,7 @@ Vue.use(VueRouter)
     component: New
   },
   {
-    path: '/fund/:fundname',
+    path: '/fund/:id',
     name: 'funddetail',
     component: Funddetail
   },
