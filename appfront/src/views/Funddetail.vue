@@ -29,8 +29,8 @@
         <p>{{ fundinfo.description }}</p>
       </div>
     </div>
-    <div style="position: sticky;float: right;width: 350px;height: 550px;box-shadow: 0px 0px 5px;margin: 155px 40px 0px 0px;padding: 40px;">
-      <span><h1 style="float: left;">${{ totalmoney }}</h1><h3 style="float: left;margin: 10px 0px 0px 20px;">raised of {{ fundinfo.goal }} goal</h3></span>
+    <div style="position: sticky;float: right;width: 350px;height: 570px;box-shadow: 0px 0px 5px;margin: 155px 40px 0px 0px;padding: 20px 40px 40px 40px;">
+      <span><h2 style="float: left;margin-top: 5px;">${{ totalmoney }}</h2><h4 style="float: left;margin: 10px 0px 0px 20px;">raised of {{ fundinfo.goal }} goal</h4></span>
       <div style="background-color: lightgreen;border-radius: 20px;height: 5px;width: 100%;margin-top: 50px;"><div id="percentbar" style="height: 5px;border-radius: 20px;background-color: green;"></div></div>
       <p style="float: left;text-align: left;"><span style="text-decoration: underline;font-size: 18px;">{{ donors }}</span><br />donors</p>
       <button class="coloredbutton" style="width: 100%;float: left;background-color: #FDB933;border: 3px #FDB933 solid;">donate</button>
@@ -43,7 +43,7 @@
           <p style="margin: 0px;"><span style="float: left;">{{ object.amount }}</span><ul style="float: left;margin: 0px;color: #A7A7A7;"><li>{{ object.time }}</li></ul></p>
         </div>
       </div>
-      <div style="margin-top: 80px;">
+      <div style="margin-top: 70px;">
         <button @click="seeall = true" style="border-radius: 5px;border: 2px green solid;background-color: white;color: green;padding: 5px 15px;font-size: 14px;font-weight: bold;">See all</button>
       </div>
     </div >
@@ -53,17 +53,36 @@
       <div v-if="alldonations">
         <h3 style="margin-top: 0px;float: left;font-weight: bold;">Donations ({{ donors }})</h3>
         <div style="float: right;">
-          <button style="border-radius: 20px;color: black;background-color: white;box-shadow: 0px 0px 10px lightgrey;padding: 5px;"><i class="mdi mdi-toggle-switch"></i>See top donations</button>
+          <button @click="alldonations = false" style="float: left;border-radius: 20px;color: black;background-color: white;border: solid 1px lightgrey;padding: 5px;"><i class="mdi mdi-toggle-switch"></i>See top donations</button>
+          <a @click="seeall = false" class="pointer" style="float: right;font-size: 30px;font-weight: 300;margin-left: 20px;"><i class="mdi mdi-close"></i></a>
+        </div><br />
+        <button style="background-color: #FDB933;border: 3px #FDB933 solid;border-radius: 5px;font-weight: bold;width: 65%;color: white;padding: 10px 10px;text-size: 20px;margin-bottom: 20px;margin-left: -15px;">Donate</button>
+        <div v-for="object in donations" :key="object.id" style="clear: both;">
+          <img style="float: left;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAD0klEQVRYhcWZTWgbRxSAB+JDMetDiA9x8CmH5FrQpTf7okvi7tkphBpTRME+BAdBb6pwDxsw2CjFRKBt2iKLgKEuuu1pAwaFZEbUDrZIMOQ9KUJEtIeZrSNyez3YK1vVKvsnWwPvsKOZ2U/vvXlv5i1jEdt+pzlddWBBKCwKiU2hkHpEYlMo+LXqwMJ+pzkd9T2hGpf1m1zhY67gbR+Qj5zMgY0LgRXUGhcSjLBQnqASO1zhT4Ja48OBU3iXS2gMA64XFBpC4d3oYE5rkiv8fdhg/QK/Cac1GQWOXzyc65/IA0MCwRdC4YvLgjsHWbGJxvy1J/GPy4Y780v8xQcOvh8VnCtVBxY84V46zWtcgjNqQC5Befojd+BJnIVX7AIlzCVKmEv0TdmgckNEh3TgSQ/cq2O4ziV2oi54a3ORNEOne+VHlLJylDCXacLQKX9gRfXFjviIU2e+p2AjKlzKypFm6GS3az39c9sZurE+H93cEgzGGGNEdIUr/CeO9lJWrq/fbteIZZNxtPjOJhpj/F+YjeN7mqHTWnXH87c4gEIhVRV8xbiCH+MAJsxlmtvO9PVvHe0SyyZjbZaqggdMKPgzDmD+wCKWTdLD54UeuNubizRTTEf3QYXEFTxjXMGbOIsIhZSplEgzdGLZJN1YnyeWTdJMMd23cUKLhD3GFXyICygUUrkhaK26Q5lKibaOdmOvd6rBD0wo+BRnka2jXcofWj3aKjcE5Q+trv/Z7RrlD60I4PApMuCKXeiak2WTlKmUSCike+VH3T6WTdJsMd33HAowrIntdo0S5hJphk4pK9ezS9eqO6SdyyD5A4s0Q6cVu9DV9vnnYCaWsBcGMGEu063NRc/w4aa5z80PMqYrEvZChRk3rQ2KbSkr55veZoppz7g5QIPPmJDwQ1DTThh619cGjdEMnb4eADC3nSHN0ANvlqqCB4FTnRvr/Ma5fjb7vzgYFk4opL+O4UtmE41xie/8Bs9tZwJnBhfy9uYi2e1aJDghoU5EV06PW7jqNyFhLlPCXKKUlfOVh88LtHW0S1Pr8zRh6OHhTmT17Dz4Eaf8Dqzu7gsirqbtdo1miunQcFxi59UxXO898iv8OeQ/vECBjf4bndOa5BLU6OHw75dO85r3tdOpfztqQK7q9z3hzu4n9acjg5NofhaOsZPSB1dYGQHgi0ClD8YYey3rVy+7ePRa1q8GguuamlrjQmHpEgBLsYqZXOEdLvH9Bfjbe67wTmSwPm0OqQR8KqtDKwGfb3GL6FzhYy7rN4cO5tX2O81p4eB3YuBnCMBhfIb4D5T4uO24483XAAAAAElFTkSuQmCC">
+          <div style="float: left;text-align: left;margin: 0px 2px 0px 15px;">
+            <h4 style="margin:0px;">{{ object.donator }}</h4>
+            <p style="margin: 0px;"><span style="float: left;">{{ object.amount }}</span><ul style="float: left;margin: 0px;color: #A7A7A7;"><li>{{ object.time }}</li></ul></p>
+          </div><br /><br />
+          <hr style="border-color: #DDDDDD;">
         </div>
+        <p style="text-align: center;color: #B5B5B5;margin-top: 20px;">You've reached the bottom of the list<br /><a @click="seeall = false" style="color: black;text-decoration: underline;">close</a></p>
       </div>
-        <div v-if="alldonations == false">
-          <h1 style="float: left;font-weight: bold;">TOP DONATIONS</h1>
+      <div v-if="alldonations == false">
+        <h3 style="margin-top: 0px;float: left;font-weight: bold;">TOP DONATIONS</h3>
         <div style="float: right;">
-        <button style="border-radius: 20px;color: black;background-color: white;box-shadow: 0px 0px 10px lightgrey;padding: 5px 10px;"><i class="mdi mdi-menu"></i>See all donations</button>
-      </div>
-      </div>
-      <div v-if="topdonations">
-        
+          <button @click="alldonations = true" style="border-radius: 20px;color: black;background-color: white;box-shadow: 0px 0px 10px lightgrey;padding: 5px 10px;"><i class="mdi mdi-menu"></i>See all donations</button>
+          <a @click="seeall = false" class="pointer" style="float: right;font-size: 30px;font-weight: 300;margin-left: 20px;"><i class="mdi mdi-close"></i></a>
+        </div><br />
+        <button style="background-color: #FDB933;border: 3px #FDB933 solid;border-radius: 5px;font-weight: bold;width: 65%;color: white;padding: 10px 10px;text-size: 20px;margin-bottom: 20px;margin-left: -55px;">Donate</button>
+        <div v-for="object in topdonations" :key="object.id" style="clear: both;">
+          <img style="float: left;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAD0klEQVRYhcWZTWgbRxSAB+JDMetDiA9x8CmH5FrQpTf7okvi7tkphBpTRME+BAdBb6pwDxsw2CjFRKBt2iKLgKEuuu1pAwaFZEbUDrZIMOQ9KUJEtIeZrSNyez3YK1vVKvsnWwPvsKOZ2U/vvXlv5i1jEdt+pzlddWBBKCwKiU2hkHpEYlMo+LXqwMJ+pzkd9T2hGpf1m1zhY67gbR+Qj5zMgY0LgRXUGhcSjLBQnqASO1zhT4Ja48OBU3iXS2gMA64XFBpC4d3oYE5rkiv8fdhg/QK/Cac1GQWOXzyc65/IA0MCwRdC4YvLgjsHWbGJxvy1J/GPy4Y780v8xQcOvh8VnCtVBxY84V46zWtcgjNqQC5Befojd+BJnIVX7AIlzCVKmEv0TdmgckNEh3TgSQ/cq2O4ziV2oi54a3ORNEOne+VHlLJylDCXacLQKX9gRfXFjviIU2e+p2AjKlzKypFm6GS3az39c9sZurE+H93cEgzGGGNEdIUr/CeO9lJWrq/fbteIZZNxtPjOJhpj/F+YjeN7mqHTWnXH87c4gEIhVRV8xbiCH+MAJsxlmtvO9PVvHe0SyyZjbZaqggdMKPgzDmD+wCKWTdLD54UeuNubizRTTEf3QYXEFTxjXMGbOIsIhZSplEgzdGLZJN1YnyeWTdJMMd23cUKLhD3GFXyICygUUrkhaK26Q5lKibaOdmOvd6rBD0wo+BRnka2jXcofWj3aKjcE5Q+trv/Z7RrlD60I4PApMuCKXeiak2WTlKmUSCike+VH3T6WTdJsMd33HAowrIntdo0S5hJphk4pK9ezS9eqO6SdyyD5A4s0Q6cVu9DV9vnnYCaWsBcGMGEu063NRc/w4aa5z80PMqYrEvZChRk3rQ2KbSkr55veZoppz7g5QIPPmJDwQ1DTThh619cGjdEMnb4eADC3nSHN0ANvlqqCB4FTnRvr/Ma5fjb7vzgYFk4opL+O4UtmE41xie/8Bs9tZwJnBhfy9uYi2e1aJDghoU5EV06PW7jqNyFhLlPCXKKUlfOVh88LtHW0S1Pr8zRh6OHhTmT17Dz4Eaf8Dqzu7gsirqbtdo1miunQcFxi59UxXO898iv8OeQ/vECBjf4bndOa5BLU6OHw75dO85r3tdOpfztqQK7q9z3hzu4n9acjg5NofhaOsZPSB1dYGQHgi0ClD8YYey3rVy+7ePRa1q8GguuamlrjQmHpEgBLsYqZXOEdLvH9Bfjbe67wTmSwPm0OqQR8KqtDKwGfb3GL6FzhYy7rN4cO5tX2O81p4eB3YuBnCMBhfIb4D5T4uO24483XAAAAAElFTkSuQmCC">
+          <div style="float: left;text-align: left;margin: 0px 2px 0px 15px;">
+            <h4 style="margin:0px;">{{ object.donator }}</h4>
+            <p style="margin: 0px;"><span style="float: left;">{{ object.amount }}</span><ul style="float: left;margin: 0px;color: #A7A7A7;"><li>{{ object.time }}</li></ul></p>
+          </div><br /><br />
+          <hr style="border-color: #DDDDDD;">
+        </div>
+        <p style="text-align: center;color: #B5B5B5;margin-top: 20px;">You've reached the bottom of the list<br /><a @click="seeall = false" style="color: black;text-decoration: underline;">close</a></p>
       </div>
     </div>
     <div v-if="share" class="popup">
@@ -92,6 +111,16 @@ export default {
     }  
   },
   computed: {
+    topdonations: function() {
+      var result = this.donations
+      result = result.filter(obj => {
+        return parseInt(obj.amount.slice(1).slice(0,-3)) > 2
+      })
+      result.sort(function(a, b) {
+        return parseInt(b.amount.slice(1).slice(0,-3)) - parseInt(a.amount.slice(1).slice(0,-3));
+      })
+      return result
+    },				  
     donations: function() {
       var fundid = this.$route.params.id
       var don = this.$parent.donations

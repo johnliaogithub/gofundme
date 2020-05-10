@@ -5,6 +5,7 @@ import Signup from '../views/Signup.vue'
 import New from '../views/New.vue'
 import Covid19page from '../views/Covid19page.vue'
 import Funddetail from '../views/Funddetail.vue'
+import Donationpage from '../views/Donationpage.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ Vue.use(VueRouter)
     path: '/fund/:id',
     name: 'funddetail',
     component: Funddetail
+  },
+  {
+    path: '/fund/:id/donate',
+    name: 'donationpage',
+    component: Donationpage
   },
   {
 	path: '/Covid19page',

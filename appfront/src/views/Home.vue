@@ -85,7 +85,7 @@ export default {
     var q;
     for (q=0;q<3;q++) {
       var object = this.$parent.projects[q]
-      document.getElementById('percentbar' + object.id ).style.width = ((this.money(q) / parseInt(object.goal.slice(1).slice(0,-3))) * 100).toString() + '%';
+      document.getElementById('percentbar' + object.id ).style.width = ((this.money(q + 1) / parseInt(object.goal.slice(1).slice(0,-3))) * 100).toString() + '%';
     }
   },
   computed: {
